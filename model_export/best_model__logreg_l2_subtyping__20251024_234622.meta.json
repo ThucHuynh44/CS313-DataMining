@@ -1,0 +1,31 @@
+{
+  "saved_at": "2025-10-24T23:46:22",
+  "model_name": "logreg_l2_subtyping",
+  "best_params": {
+    "logisticregression__C": 1,
+    "pipeline__kbest__k": 100
+  },
+  "cv_best_pr_auc": 0.9826098176618772,
+  "test_metrics": {
+    "ROC-AUC": 0.9339143064633261,
+    "PR-AUC": 0.9826258208819637,
+    "F1": 0.9183673469387755,
+    "ACC": 0.873015873015873
+  },
+  "n_train": 766,
+  "n_test": 189,
+  "n_features_raw": 60660,
+  "use_sparse_input": false,
+  "label_mapping": {
+    "Infiltrating duct carcinoma": 1,
+    "Lobular carcinoma": 0
+  },
+  "env": {
+    "python": "3.14.0 | packaged by Anaconda, Inc. | (main, Oct  8 2025, 17:15:28) [GCC 11.2.0]",
+    "platform": "Linux-5.8.0-53-generic-x86_64-with-glibc2.31",
+    "numpy": "2.3.4",
+    "pandas": "2.3.3",
+    "scikit_learn": "1.7.2",
+    "xgboost": "3.1.1"
+  }
+}

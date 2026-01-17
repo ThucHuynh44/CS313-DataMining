@@ -1,0 +1,31 @@
+{
+  "saved_at": "2025-10-25T11:04:15",
+  "model_name": "linear_svm_normal_tumor",
+  "best_params": {
+    "linearsvc__C": 3,
+    "pipeline__kbest__k": 100
+  },
+  "cv_best_pr_auc": 0.9999444237610533,
+  "test_metrics": {
+    "ROC-AUC": 1.0,
+    "PR-AUC": 1.0,
+    "F1": 0.9955555555555555,
+    "ACC": 0.9918367346938776
+  },
+  "n_train": 986,
+  "n_test": 245,
+  "n_features_raw": 60660,
+  "use_sparse_input": false,
+  "label_mapping": {
+    "Tumor": 1,
+    "Normal": 0
+  },
+  "env": {
+    "python": "3.14.0 | packaged by Anaconda, Inc. | (main, Oct  8 2025, 17:15:28) [GCC 11.2.0]",
+    "platform": "Linux-5.8.0-53-generic-x86_64-with-glibc2.31",
+    "numpy": "2.3.4",
+    "pandas": "2.3.3",
+    "scikit_learn": "1.7.2",
+    "xgboost": "3.1.1"
+  }
+}

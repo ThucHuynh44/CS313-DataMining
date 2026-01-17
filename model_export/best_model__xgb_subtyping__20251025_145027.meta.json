@@ -1,0 +1,37 @@
+{
+  "saved_at": "2025-10-25T14:50:28",
+  "model_name": "xgb_subtyping",
+  "best_params": {
+    "pipeline__kbest__k": 2000,
+    "xgbclassifier__colsample_bytree": 0.8,
+    "xgbclassifier__learning_rate": 0.03,
+    "xgbclassifier__max_depth": 6,
+    "xgbclassifier__min_child_weight": 2.0,
+    "xgbclassifier__n_estimators": 600,
+    "xgbclassifier__reg_lambda": 2.0,
+    "xgbclassifier__subsample": 0.8
+  },
+  "cv_best_pr_auc": 0.9851250481009233,
+  "test_metrics": {
+    "ROC-AUC": 0.9469862018881627,
+    "PR-AUC": 0.9858409855904897,
+    "F1": 0.9514563106796117,
+    "ACC": 0.9206349206349206
+  },
+  "n_train": 766,
+  "n_test": 189,
+  "n_features_raw": 60660,
+  "use_sparse_input": false,
+  "label_mapping": {
+    "Infiltrating duct carcinoma": 1,
+    "Lobular carcinoma": 0
+  },
+  "env": {
+    "python": "3.14.0 | packaged by Anaconda, Inc. | (main, Oct  8 2025, 17:15:28) [GCC 11.2.0]",
+    "platform": "Linux-5.8.0-53-generic-x86_64-with-glibc2.31",
+    "numpy": "2.3.4",
+    "pandas": "2.3.3",
+    "scikit_learn": "1.7.2",
+    "xgboost": "3.1.1"
+  }
+}

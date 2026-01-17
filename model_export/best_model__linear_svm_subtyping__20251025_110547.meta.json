@@ -1,0 +1,31 @@
+{
+  "saved_at": "2025-10-25T11:05:47",
+  "model_name": "linear_svm_subtyping",
+  "best_params": {
+    "linearsvc__C": 0.1,
+    "pipeline__kbest__k": 100
+  },
+  "cv_best_pr_auc": 0.9828149814416516,
+  "test_metrics": {
+    "ROC-AUC": 0.9331880900508351,
+    "PR-AUC": 0.9824704935994419,
+    "F1": 0.9220338983050848,
+    "ACC": 0.8783068783068783
+  },
+  "n_train": 766,
+  "n_test": 189,
+  "n_features_raw": 60660,
+  "use_sparse_input": false,
+  "label_mapping": {
+    "Infiltrating duct carcinoma": 1,
+    "Lobular carcinoma": 0
+  },
+  "env": {
+    "python": "3.14.0 | packaged by Anaconda, Inc. | (main, Oct  8 2025, 17:15:28) [GCC 11.2.0]",
+    "platform": "Linux-5.8.0-53-generic-x86_64-with-glibc2.31",
+    "numpy": "2.3.4",
+    "pandas": "2.3.3",
+    "scikit_learn": "1.7.2",
+    "xgboost": "3.1.1"
+  }
+}

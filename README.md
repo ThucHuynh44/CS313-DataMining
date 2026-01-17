@@ -1,37 +1,59 @@
-# Clinical Data Analysis — TCGA‑BRCA (MVP)
+# CS313 Data Mining — TCGA-BRCA
 
-This mini web app lets you explore a **TCGA clinical cart JSON** and reproduce a subset of the *GDC Analysis Center → Clinical Data Analysis* experience:
+Kho lưu trữ này tập trung vào phân tích dữ liệu TCGA-BRCA, bao gồm:
 
-- Cohort filters (gender, race, stage, year of diagnosis, laterality + receptor status from `molecular_tests`).
-- Demographic charts (gender, race, ethnicity), stage distribution, receptor status.
-- Kaplan–Meier overall survival (OS) curves, optionally stratified by stage or receptors.
-- Download the filtered cohort to CSV.
+- **Streamlit clinical dashboard** để khám phá dữ liệu clinical JSON từ GDC.
+- **Streamlit survival demo** để chấm điểm nguy cơ sống còn trên một mẫu bằng mô hình Cox.
+- **Notebook/pipeline** cho các bước chuẩn hoá dữ liệu, chọn đặc trưng và huấn luyện mô hình.
+- **Artifact và bảng đặc trưng** phục vụ inference/đánh giá.
 
-> **Input**: a JSON file exported from GDC *Repository → Clinical* (aka `clinical.cart.*.json`).  
-> **Output**: plots and tables for your selected cohort.
-
-## Run
+## Cài đặt nhanh
 
 ```bash
 python -m venv .venv && source .venv/bin/activate  # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
+```
+
+> Lưu ý: nếu chạy `task3_demo.py`, cần thêm `scikit-survival` (chưa nằm trong `requirements.txt`).
+
+## Chạy các ứng dụng Streamlit
+
+### 1) Clinical dashboard
+
+```bash
 streamlit run app.py
 ```
 
-Then open the local URL printed by Streamlit.
+- Input: JSON từ GDC (*Repository → Clinical*), ví dụ: `sample/clinical.cart.2025-10-21.json`.
+- Output: thống kê cohort, biểu đồ nhân khẩu học, phân bố stage, receptor status và Kaplan–Meier OS.
 
-## Files
+### 2) Survival demo (Task 3)
 
-- `app.py` — Streamlit UI.
-- `utils_clinical.py` — JSON flattener + derived features.
-- `sample/clinical.cart.2025-10-21.json` — a small sample to try immediately.
-- `requirements.txt` — Python dependencies.
+```bash
+streamlit run app_task3_demo.py
+```
 
-## Notes
+- Upload gene expression file (TSV/CSV) và điền các đặc trưng lâm sàng theo form.
+- Dùng các artifact mặc định: `coxph_streamlit_artifact.joblib`, `coxnet_streamlit_artifact.joblib`.
 
-- **OS definition**: `OS_event=1` if `vital_status="Dead"` and `days_to_death` is present.  
-  `OS_time = days_to_death` if event else `max(days_to_follow_up, days_to_last_follow_up)` as a proxy.
-- **Receptor status** is extracted from `follow_ups[].molecular_tests[]` using `gene_symbol ∈ {ESR1,PGR,ERBB2}` and `test_result` ∈ {`Positive`,`Negative`, otherwise `Indeterminate`}.
-- The parser keeps only the **primary diagnosis** per case (or the one with `days_to_diagnosis==0`, otherwise the first).
+## Cấu trúc thư mục chính
 
-This is an MVP; feel free to expand with: PFS, treatment timelines, per‑center comparisons, and shapable exports.
+- `app.py`: Clinical dashboard Streamlit.
+- `app_task3_demo.py`: Demo chấm điểm sống còn trên một mẫu.
+- `task3_demo.py`: Script thử nghiệm/so sánh pipeline cho Task 3.
+- `utils_clinical.py`: Hàm parse clinical JSON + feature engineering.
+- `prepare_data/`: Notebook tiền xử lý và gộp dữ liệu.
+- `train_and_preprocess/`: Pipeline/Notebook huấn luyện mô hình.
+- `model_export/`: Mô hình phân loại đã xuất (normal/tumor, subtyping).
+- `*.csv`: Bảng đặc trưng đã trích xuất (XGB/RF/SVM).
+- `sample/`: Dữ liệu mẫu để chạy nhanh.
+
+## Gợi ý dữ liệu đầu vào
+
+- **Clinical JSON**: xuất từ GDC, dùng cho `app.py`.
+- **Expression TSV/CSV**: xuất từ STAR/HTSeq hoặc bảng gene expression tương tự, dùng cho demo Task 3.
+
+## Ghi chú
+
+- Repo này chứa nhiều notebook và artifact để tham khảo; bạn có thể chạy lại pipeline trong `prepare_data/` và `train_and_preprocess/` nếu cần tái huấn luyện.
+- Nếu thiếu dependency khi chạy notebook/streamlit, hãy cài bổ sung theo lỗi hiển thị.
